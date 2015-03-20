@@ -18,8 +18,8 @@ class ServiceProvider extends LaravelServiceProvider {
      */
     public function boot() {
 
-        $this->handleConfigs();
-        // $this->handleMigrations();
+        $this->handleMigrations();
+        // $this->handleConfigs();
         // $this->handleViews();
         // $this->handleTranslations();
         // $this->handleRoutes();
