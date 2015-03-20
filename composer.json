@@ -1,0 +1,20 @@
+{
+  "name": "rotvulpix/transbank-laravel5",
+  "description": "Transbank - Webpay module for Laravel5",
+  "license": "MIT",
+  "homepage": "http://www.rotvulpix.cl",
+  "authors": [{
+    "name": "Javier Godoy Núñez",
+    "email": "rotvulpix@gmail.com"
+    }],
+  "require": {
+    "php": ">=5.4.0",
+    "illuminate/config": "~5.0",
+    "illuminate/support": "~5.0"
+    },
+  "require-dev": { "phpunit/phpunit": "~4.0"},
+  "autoload": {
+    "psr-4": {"rotvulpix\\transbank\\": "src/"}
+    },
+  "minimum-stability": "dev"
+}
