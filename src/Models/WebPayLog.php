@@ -1,4 +1,4 @@
-<?php namespace rotvulpix\romulus\Models;
+<?php namespace rotvulpix\transbank\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class WebPayLog extends Model {
