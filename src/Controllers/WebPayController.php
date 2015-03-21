@@ -1,7 +1,8 @@
 <?php namespace rotvulpix\transbank\Controllers;
-use rotvulpix\romulus\Controllers\Controller;
-use rotvulpix\romulus\Models;
-
+use rotvulpix\transbank\Controllers\Controller;
+use rotvulpix\transbank\Models;
+use rotvulpix\transbank\Services;
+use Input;
 class WebPayController extends Controller {
 	public function checkout($transaccion) {
 		$log = new Models\WebPayLog();
@@ -20,7 +21,29 @@ class WebPayController extends Controller {
 	}
 
 	public function exito() {
+		$input = Input::all();
+		if(isset($input['TBK_ID_SESION']) && isset($input['TBK_ORDEN_COMPRA'])) {
+            // Entity Manager
+            $em = $this->getDoctrine()->getManager();
+            // Obtener Log de Transacción
+            $paramLog = [
+                'sesion' => $input['TBK_ID_SESION'],
+                'ordenCompra' => $input['TBK_ORDEN_COMPRA']
+                ];
 
+            $logTransaccion = Models\WebPayLog::where($paramLog)->firstOrFail();
+            if(!$logTransaccion) { throw new \Exception("No Existe Log de Transacción - " . json_encode($paramLog)); }
+            // Nuevo Ítem de Transacción
+            $transaccion = new Services\Transaccion();
+            // Ítems
+            $manzanas = new Services\ItemTransaccion(3990, 'Caja de Manzanas', 4);
+            // Agregar Ítems
+            $transaccion->addItem($manzanas);
+            // Añadimos Transacción al Render
+            $parametros['transaccion'] = $transaccion;
+            $parametros['logTransaccion'] = $logTransaccion;
+
+        }
 	}
 
 	public function fracaso() {
@@ -29,9 +52,10 @@ class WebPayController extends Controller {
 
 	public function cierre() {
 		try {
+			$input = Input::all();
 
 		} catch (\Exception $e) {
-			
+
 		}
 	}
 }
