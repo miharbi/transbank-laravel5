@@ -4,4 +4,6 @@
  * Your package config would go here
  */
 
-return [];
+return [
+	'cgi_transbank': '/ruta/a/cgi-bin/'
+];
